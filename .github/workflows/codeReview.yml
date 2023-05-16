@@ -16,18 +16,18 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          python-version: 3.x
+          node-version: 16
 
       - name: Install dependencies
-        run: pip install flake8
+        run: npm install -g eslint
 
       - name: Run code review
         run: |
-          # Run Flake8 linter
-          flake8 --exclude=.git
+          # Run ESLint
+          eslint .
 
           # Check the exit code and send notification
           EXIT_CODE=$?
