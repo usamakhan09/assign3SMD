@@ -1,0 +1,36 @@
+name: Code Review
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install flake8
+
+      - name: Run code review
+        run: |
+          # Run Flake8 linter
+          flake8 --exclude=.git
+
+          # Check the exit code and send notification
+          EXIT_CODE=$?
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "Code review passed. No improvements needed."
+          else
+            echo "Code review failed. Please make the necessary improvements."
+            # Add your notification logic here
+          fi
