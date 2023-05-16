@@ -27,7 +27,7 @@ jobs:
       - name: Run code review
         run: |
           # Run ESLint
-          eslint .
+          eslint ./assign3SMD/app/src
 
           # Check the exit code and send notification
           EXIT_CODE=$?
